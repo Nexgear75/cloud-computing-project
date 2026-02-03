@@ -14,19 +14,19 @@ def hello_world():
     return "<p>This is the landing page !</p>"
 
 
-@app.route("./api/events")
+@app.route("/api/events")
 @cache.cached(timeout=60)
 def get_events():
     return "<h1>Event page</h1>"
 
 
-@app.route("./api/news")
+@app.route("/api/news")
 @cache.cached(timeout=60)
 def get_news():
     return "<h1>News page</h1>"
 
 
-@app.route("./api/faq")
+@app.route("/api/faq")
 @cache.cached(timeout=60)
 def get_faq():
     return "<h1>Faq page</h1>"
