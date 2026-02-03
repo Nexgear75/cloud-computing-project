@@ -1,2 +1,6 @@
 flask
 Flask-Caching
+azure-storage-blob
+azure-identity
+pyyaml
+python-dotenv
