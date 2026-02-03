@@ -1,0 +1,53 @@
+{
+  "news_feed": {
+    "version": "2.1",
+    "last_updated": "2026-02-03T16:00:00Z",
+    "articles": [
+      {
+        "id": "NEWS-982",
+        "titre": "Lancement de l'Infrastructure Quantum-Ready",
+        "auteur": { "nom": "Sophie Martin", "role": "CTO" },
+        "date_publication": "2026-02-01",
+        "lecture_estimee": "5 min",
+        "contenu_court": "Nous déployons aujourd'hui nos premiers nœuds de calcul quantique.",
+        "tags": ["Innovation", "Quantum", "Infrastructure"]
+      },
+      {
+        "id": "NEWS-981",
+        "titre": "Résultats du Hackathon Annuel",
+        "auteur": { "nom": "Jean Dupont", "role": "Community Manager" },
+        "date_publication": "2026-01-28",
+        "lecture_estimee": "3 min",
+        "contenu_court": "Félicitations à l'équipe 'CyberGuard' pour leur solution de sécurité.",
+        "tags": ["Hackathon", "Sécurité", "Événement"]
+      },
+      {
+        "id": "NEWS-980",
+        "titre": "Nouveau protocole de télétravail",
+        "auteur": { "nom": "Claire Rousseau", "role": "RH" },
+        "date_publication": "2026-01-20",
+        "lecture_estimee": "4 min",
+        "contenu_court": "Flexibilité accrue et nouveaux outils de collaboration à distance.",
+        "tags": ["RH", "Corporate"]
+      },
+      {
+        "id": "NEWS-979",
+        "titre": "Optimisation des performances API",
+        "auteur": { "nom": "Thomas Weber", "role": "Lead Dev" },
+        "date_publication": "2026-01-15",
+        "lecture_estimee": "6 min",
+        "contenu_court": "Réduction de 40% du temps de latence sur nos endpoints globaux.",
+        "tags": ["DevOps", "API", "Performance"]
+      },
+      {
+        "id": "NEWS-978",
+        "titre": "Ouverture du bureau de Singapour",
+        "auteur": { "nom": "Marc Vasseur", "role": "Expansion" },
+        "date_publication": "2026-01-05",
+        "lecture_estimee": "2 min",
+        "contenu_court": "Notre présence en Asie du Sud-Est se renforce officiellement.",
+        "tags": ["Expansion", "Global"]
+      }
+    ]
+  }
+}

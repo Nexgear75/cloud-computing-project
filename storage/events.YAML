@@ -1,0 +1,56 @@
+agenda_culturel:
+  annee: 2026
+  evenements:
+    - id: "EVT-001"
+      nom: "Conférence IA & Éthique"
+      type: "Conférence"
+      horaires:
+        debut: "2026-03-12T09:00:00"
+        fin: "2026-03-12T18:00:00"
+      lieu:
+        salle: "Amphi A"
+        adresse: "12 Rue de l'Innovation, Lyon"
+      intervenants:
+        - { nom: "Dr. Aris", expertise: "Éthique" }
+        - { nom: "Léa Kim", expertise: "IA Générative" }
+      prix: 15.00
+
+    - id: "EVT-002"
+      nom: "Atelier Yoga et Bien-être"
+      type: "Sport"
+      horaires:
+        debut: "2026-03-15T10:30:00"
+        fin: "2026-03-15T12:00:00"
+      lieu: { salle: "Espace Calme", adresse: "En ligne" }
+      description: "Session de relaxation profonde pour les employés."
+      prix: 0.00
+
+    - id: "EVT-003"
+      nom: "Networking Night"
+      type: "Social"
+      horaires:
+        debut: "2026-03-20T19:00:00"
+        fin: "2026-03-20T23:30:00"
+      lieu: { salle: "Le Rooftop", adresse: "45 Boulevard Haussmann, Paris" }
+      notes: "Tenue correcte exigée."
+      prix: 25.00
+
+    - id: "EVT-004"
+      nom: "Webinaire : Cybersécurité"
+      type: "Formation"
+      horaires:
+        debut: "2026-04-02T14:00:00"
+        fin: "2026-04-02T16:00:00"
+      lieu: { salle: "Zoom", adresse: "Lien envoyé par email" }
+      intervenants: [{ nom: "Kevin Mitnick Jr", expertise: "Pen-testing" }]
+      prix: 0.00
+
+    - id: "EVT-005"
+      nom: "Festival du Cinéma Digital"
+      type: "Festival"
+      horaires:
+        debut: "2026-05-01T10:00:00"
+        fin: "2026-05-03T22:00:00"
+      lieu: { salle: "Cinéma Le Grand Rex", adresse: "Paris" }
+      description: "Trois jours de projections dédiées aux films créés par IA."
+      prix: 45.00
