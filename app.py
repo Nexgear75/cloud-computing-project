@@ -72,6 +72,7 @@ def health_check():
 
 
 @app.route("/readyz")
+@cache.cached(timeout=60)
 def get_readyz():
     try:
         container_client = blob_service_client.get_container_client(container_name)
