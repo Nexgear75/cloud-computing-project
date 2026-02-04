@@ -56,8 +56,8 @@ function App() {
 
           {/* Zone des Status */}
           <div className="mb-14 flex flex-wrap justify-center gap-4 bg-gray-900/80 p-2 rounded-2xl border border-gray-800 shadow-lg backdrop-blur-md">
-            <StatusBadge label="App Flask" endpoint="/healthz" />
-            <StatusBadge label="Azure Storage" endpoint="/readyz" />
+            <StatusBadge label="App Flask" endpoint="/health" />
+            <StatusBadge label="Azure Storage" endpoint="/ready" />
           </div>
 
           {/* Navigation (Onglets) */}
