@@ -4,3 +4,4 @@ azure-storage-blob
 azure-identity
 pyyaml
 python-dotenv
+flask-cors

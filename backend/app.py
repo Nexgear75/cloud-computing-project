@@ -6,12 +6,14 @@ import yaml
 import json
 from dotenv import load_dotenv
 from flask_caching import Cache
+from flask_cors import CORS
 
 load_dotenv()
 
 config = {"DEBUG": True, "CACHE_TYPE": "SimpleCache", "CACHE_DEFAULT_TIMEOUT": 60}
 
 app = Flask(__name__)
+CORS(app)
 app.config.from_mapping(config)
 cache = Cache(app)
 

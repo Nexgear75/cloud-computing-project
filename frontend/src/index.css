@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+/* En v4, on configure le thème directement ici */
+@theme {
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* On applique le style de base */
+body {
+  /* On utilise les classes utilitaires directement */
+  @apply bg-gray-950 text-gray-100 antialiased font-sans;
+}
