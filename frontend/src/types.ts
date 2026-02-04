@@ -28,7 +28,7 @@ export interface EventItem {
   description?: string; // Optionnel
   horaires: { debut: string; fin: string };
   lieu: { adresse: string; salle: string };
-  intervenants?: Intervenant[]; // Optionnel car absent de certains events
+  intervenants?: Intervenant[]; // Optionnel
 }
 
 export interface EventsResponse {
