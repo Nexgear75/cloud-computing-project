@@ -5,7 +5,6 @@ from azure.core.exceptions import AzureError
 import yaml
 import json
 from dotenv import load_dotenv
-
 from flask_caching import Cache
 
 load_dotenv()
@@ -16,8 +15,8 @@ app = Flask(__name__)
 app.config.from_mapping(config)
 cache = Cache(app)
 
-connection_string = os.environ["AZURE_STORAGE_CONNECTION_STRING"]
-container_name = os.environ["AZURE_CONTAINER_NAME"]
+connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+container_name = os.getenv("AZURE_CONTAINER_NAME")
 blob_service_client = BlobServiceClient.from_connection_string(connection_string)
 container_client = blob_service_client.get_container_client(container_name)
 
@@ -82,3 +81,7 @@ def get_readyz():
     except AzureError as e:
         app.logger.error(f"Error while trying to connect to Azure Storage : {e}")
         return jsonify({"status": "unready", "reason": "storage_error"}), 503
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
