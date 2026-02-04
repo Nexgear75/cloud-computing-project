@@ -5,10 +5,8 @@ interface Props {
 }
 
 export default function EventsTable({ events }: Props) {
-
-  // Sécurité 1 : Si la liste elle-même est vide ou nulle
   if (!events || events.length === 0) {
-    return <div style={{ padding: '2rem', textAlign: 'center' }}>Aucun événement disponible.</div>;
+    return <div className="text-center text-gray-500 py-12">Aucun événement prévu.</div>;
   }
 
   const formatDate = (dateString: string) => {
@@ -21,66 +19,51 @@ export default function EventsTable({ events }: Props) {
   };
 
   return (
-    <table className="beautiful-table">
-      <thead>
-        <tr>
-          <th>Événement</th>
-          <th>Type</th>
-          <th>Lieu</th>
-          <th>Date</th>
-          <th>Prix</th>
-        </tr>
-      </thead>
-      <tbody>
-        {events.map((evt, index) => (
-          // Utilisez index en fallback si l'ID est manquant
-          <tr key={evt.id || index}>
-            <td>
-              {/* Sécurité sur le nom */}
-              <strong>{evt.nom || 'Événement sans nom'}</strong>
-
-              {/* Sécurité sur les intervenants (vérifie si le tableau existe ET s'il a des éléments) */}
-              {evt.intervenants && evt.intervenants.length > 0 && (
-                <div style={{ fontSize: '0.8em', color: '#666', marginTop: '4px' }}>
-                  Avec : {evt.intervenants.map(i => i.nom).join(', ')}
-                </div>
-              )}
-            </td>
-
-            <td>
-              <span className="badge">{evt.type || 'Divers'}</span>
-            </td>
-
-            {/* --- C'EST ICI QUE ÇA PLANTAIT --- */}
-            <td>
-              {/* On vérifie si evt.lieu existe avec le "?" */}
-              {evt.lieu ? (
-                <>
-                  {evt.lieu.salle || 'Salle inconnue'}<br />
-                  <small>{evt.lieu.adresse || ''}</small>
-                </>
-              ) : (
-                <span style={{ fontStyle: 'italic', color: '#999' }}>
-                  Lieu à définir
-                </span>
-              )}
-            </td>
-
-            <td>
-              {/* Sécurité sur horaires */}
-              {evt.horaires?.debut ? formatDate(evt.horaires.debut) : 'Date à venir'}
-              {evt.horaires?.fin && (
-                <> <br /> à {formatDate(evt.horaires.fin).split(' ')[2] || ''}</>
-              )}
-            </td>
-
-            <td style={{ fontWeight: 'bold', color: evt.prix === 0 ? 'green' : 'inherit' }}>
-              {/* Gestion du prix (le 0 est "falsy" en JS, donc attention aux conditions) */}
-              {evt.prix === undefined ? 'N/A' : (evt.prix === 0 ? 'Gratuit' : `${evt.prix} €`)}
-            </td>
+    <div className="overflow-x-auto">
+      <table className="w-full text-left text-gray-300">
+        <thead className="bg-gray-800/50 text-blue-400 uppercase text-xs font-bold tracking-wider border-b border-gray-700">
+          <tr>
+            <th className="px-6 py-4">Événement</th>
+            <th className="px-6 py-4">Type</th>
+            <th className="px-6 py-4">Lieu</th>
+            <th className="px-6 py-4">Date</th>
+            <th className="px-6 py-4 text-right">Prix</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className="divide-y divide-gray-800">
+          {events.map((evt, index) => (
+            <tr key={evt.id || index} className="hover:bg-gray-800/60 transition-colors">
+              <td className="px-6 py-4">
+                <div className="font-bold text-white text-lg">{evt.nom}</div>
+                {evt.intervenants && evt.intervenants.length > 0 && (
+                  <div className="text-xs text-gray-500 mt-1">
+                    Avec : {evt.intervenants.map(i => i.nom).join(', ')}
+                  </div>
+                )}
+              </td>
+              <td className="px-6 py-4">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-900/30 text-blue-300 border border-blue-800">
+                  {evt.type}
+                </span>
+              </td>
+              <td className="px-6 py-4 text-sm">
+                <div className="text-gray-200">{evt.lieu?.salle || 'Salle N/A'}</div>
+                <div className="text-gray-500 text-xs">{evt.lieu?.adresse}</div>
+              </td>
+              <td className="px-6 py-4 text-sm whitespace-nowrap">
+                <div className="text-gray-300">{evt.horaires?.debut ? formatDate(evt.horaires.debut) : '-'}</div>
+              </td>
+              <td className="px-6 py-4 text-right">
+                {evt.prix === 0 ? (
+                  <span className="text-green-400 font-bold text-sm bg-green-900/20 px-2 py-1 rounded">Gratuit</span>
+                ) : (
+                  <span className="text-white font-mono">{evt.prix} €</span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
