@@ -102,7 +102,7 @@ spec:
           readinessProbe:
             httpGet:
               port: 5000
-              path: /readyz
+              path: /ready
             initialDelaySeconds: 5
             periodSeconds: 10
             timeoutSeconds: 5
