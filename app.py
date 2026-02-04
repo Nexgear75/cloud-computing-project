@@ -41,8 +41,8 @@ def hello_world():
     \n/api/events
     \n/api/news
     \n/api/faq
-    \n/healthz
-    \n/readyz
+    \n/health
+    \n/ready
     </p>
     """
 
@@ -65,12 +65,12 @@ def get_faq():
     return jsonify(read_blob("faq.YAML"))
 
 
-@app.route("/healthz")
+@app.route("/health")
 def health_check():
     return jsonify({"status": "healthy"}), 200
 
 
-@app.route("/readyz")
+@app.route("/ready")
 @cache.cached(timeout=60)
 def get_readyz():
     try:
