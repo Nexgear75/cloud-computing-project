@@ -1,0 +1,7 @@
+.gitignore
+.git
+README.md
+storage/
+Projet_CloudComputing_2026.pdf
+.venv/
+.env
