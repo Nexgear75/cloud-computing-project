@@ -1,6 +1,7 @@
 import os
 from flask import Flask, jsonify
 from azure.storage.blob import BlobServiceClient
+from azure.core.exceptions import AzureError
 import yaml
 import json
 from dotenv import load_dotenv
@@ -34,7 +35,17 @@ def read_blob(blob_name):
 @app.route("/")
 @cache.cached(timeout=60)
 def hello_world():
-    return "<p>This is the landing page !</p>"
+    return """
+    <p>
+    This is the landing page !
+    You can acces to the following addresses : 
+    \n/api/events
+    \n/api/news
+    \n/api/faq
+    \n/healthz
+    \n/readyz
+    </p>
+    """
 
 
 @app.route("/api/events")
@@ -62,4 +73,12 @@ def health_check():
 
 @app.route("/readyz")
 def get_readyz():
-    return "<h1>Readyz page</h1>"
+    try:
+        container_client = blob_service_client.get_container_client(container_name)
+        container_client.get_container_properties()
+
+        return jsonify({"status": "ready", "storage": "connected"}), 200
+
+    except AzureError as e:
+        app.logger.error(f"Error while trying to connect to Azure Storage : {e}")
+        return jsonify({"status": "unready", "reason": "storage_error"}), 503
