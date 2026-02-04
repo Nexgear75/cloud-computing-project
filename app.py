@@ -1,11 +1,34 @@
+import os
 from flask import Flask, jsonify
+from azure.storage.blob import BlobServiceClient
+import yaml
+import json
+from dotenv import load_dotenv
+
 from flask_caching import Cache
+
+load_dotenv()
 
 config = {"DEBUG": True, "CACHE_TYPE": "SimpleCache", "CACHE_DEFAULT_TIMEOUT": 60}
 
 app = Flask(__name__)
 app.config.from_mapping(config)
 cache = Cache(app)
+
+connection_string = os.environ["AZURE_STORAGE_CONNECTION_STRING"]
+container_name = os.environ["AZURE_CONTAINER_NAME"]
+blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+container_client = blob_service_client.get_container_client(container_name)
+
+
+def read_blob(blob_name):
+    blob_client = container_client.get_blob_client(blob_name)
+    data = blob_client.download_blob().readall()
+    if blob_name.lower().endswith((".yaml", ".yml")):
+        return yaml.safe_load(data)
+    elif blob_name.lower().endswith(".json"):
+        return json.loads(data)
+    return data.decode("utf-8")
 
 
 @app.route("/")
@@ -14,22 +37,22 @@ def hello_world():
     return "<p>This is the landing page !</p>"
 
 
-@app.route("./api/events")
+@app.route("/api/events")
 @cache.cached(timeout=60)
 def get_events():
-    return "<h1>Event page</h1>"
+    return jsonify(read_blob("events.YAML"))
 
 
-@app.route("./api/news")
+@app.route("/api/news")
 @cache.cached(timeout=60)
 def get_news():
-    return "<h1>News page</h1>"
+    return jsonify(read_blob("news.JSON"))
 
 
-@app.route("./api/faq")
+@app.route("/api/faq")
 @cache.cached(timeout=60)
 def get_faq():
-    return "<h1>Faq page</h1>"
+    return jsonify(read_blob("faq.YAML"))
 
 
 @app.route("/healthz")
