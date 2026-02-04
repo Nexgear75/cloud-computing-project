@@ -1,13 +1,23 @@
 version: "3.8"
 
 services:
-  flask-app:
-    build: .
-
+  api:
+    build: ./backend
     ports:
       - "5000:5000"
-
     env_file:
       - .env
+    volumes:
+      - ./backend:/app
 
-    restart: on-failure
+  web:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:5000
+    depends_on:
+      - api
+    volumes:
+      - ./frontend/src:/app/src
+      - /app/node_modules
